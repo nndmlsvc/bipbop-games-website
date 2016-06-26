@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Reflect Yoself</title>
+
+
+    <meta property="og:title" content="Reflect Yoself - Free Online Game" />
+    <meta property="og:description" content="Draw the lines with your finger to make cute monster bounce in desired direction. This simple game is a hard and fun challenge for your orientation ability - You'll need to predict and aim where you wanna reflect by drawing a line in front of your moving player to change his course. It's really easy to play but hard to master. ;)" />
+    <meta property="og:url" content="http://bipbopgames.com/reflect-yoself.html" />
+    <meta property="og:image" content="http://bipbopgames.com/img/ry-og-image.png" />
+    <link rel="image_src" href="http://bipbopgames.com/img/ry-og-image.png" />
+    <meta property="og:type" content="game" />
+    <meta property="og:site_name" content="bipbop games" />
+
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+    <script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
+    <script type="text/javascript">
+        <!--
+        var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+        if (document.location.protocol == 'https:')
+            unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+        document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+        -->
+    </script>
+    <script type="text/javascript">
+        <!--
+        var config = {
+            //width: 360, 
+            //height: 640,
+            params: {
+                enableDebugging: "0"
+            }
+
+        };
+        config.params["disableContextMenu"] = true;
+        var u = new UnityObject2(config);
+
+        jQuery(function () {
+
+            var $missingScreen = jQuery("#unityPlayer").find(".missing");
+            var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+            $missingScreen.hide();
+            $brokenScreen.hide();
+
+            u.observeProgress(function (progress) {
+                switch (progress.pluginStatus) {
+                case "broken":
+                    $brokenScreen.find("a").click(function (e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        u.installPlugin();
+                        return false;
+                    });
+                    $brokenScreen.show();
+                    break;
+                case "missing":
+                    $missingScreen.find("a").click(function (e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        u.installPlugin();
+                        return false;
+                    });
+                    $missingScreen.show();
+                    break;
+                case "installed":
+                    $missingScreen.remove();
+                    break;
+                case "first":
+                    break;
+                }
+            });
+            u.initPlugin(jQuery("#unityPlayer")[0], "unity/reflect-yoself.unity3d");
+        });
+        -->
+    </script>
+
+
+    <script>
+        function alertSize() {
+            var screenWidth = 0,
+                screenHeight = 0;
+            if (typeof (window.innerWidth) == 'number') {
+                //Non-IE
+                screenWidth = window.innerWidth;
+                screenHeight = window.innerHeight;
+            } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+                //IE 6+ in 'standards compliant mode'
+                screenWidth = document.documentElement.clientWidth;
+                screenHeight = document.documentElement.clientHeight;
+            } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+                //IE 4 compatible
+                screenWidth = document.body.clientWidth;
+                screenHeight = document.body.clientHeight;
+            }
+
+            resizeUnityPlayer = function () {
+                document.getElementById("unityPlayer").style.height = screenHeight + "px";
+                newScreenWidth = Math.round(screenHeight / 1.7777);
+                document.getElementById("unityPlayer").style.width = newScreenWidth + "px";
+            }
+
+            window.onload = function () {
+                resizeUnityPlayer();
+            }
+            window.onresize = function () {
+                alertSize();
+                resizeUnityPlayer();
+            }
+        }
+        alertSize();
+    </script>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background: #491c4c url(img/bipbop-pattern.png) repeat;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
+            color: #fff;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            line-height: 24px;
+            font-weight: 300;
+            direction: ltr;
+        }
+        
+        p {
+            font-weight: 300;
+        }
+        
+        h1 {
+            font-weight: 300;
+        }
+        
+        a {
+            color: #fff;
+        }
+        
+        a:hover {
+            color: #ffd545;
+        }
+        
+        #unityPlayer {
+            width: 360px;
+            height: 640px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 5px;
+            background: #491c4c;
+            display: inline-block;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        .content {
+            max-width: 1120px;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            position: relative;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        .game-info {
+            width: 40%;
+            display: inline-block;
+            vertical-align: top;
+            margin: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            padding: 20px;
+            overflow: auto;
+        }
+        
+        .social-link {
+            margin: 0 20px 0 0;
+            cursor: pointer;
+            font-size: 0;
+        }
+        
+        .social-link img {
+            max-width: 30px;
+            max-height: 30px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div id="unityPlayer">
+            <div class="missing">
+                <a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+                    <img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+                </a>
+            </div>
+        </div>
+        <div class="game-info">
+            <a href="http://bipbopgames.com" target="_blank">
+                <img src="img/bipbop-logo.png" style="width: 200px;" />
+            </a>
+            <p>
+                proudly presents <strong>Reflect Yoself</strong>
+            </p>
+            <br>
+            <h1>How to Run</h1>
+            <p>
+                You’ll need <a href="http://unity3d.com/webplayer" target="_blank">Unity Web Player</a> to run this game in your browser (it's not working in Chrome at the moment - <a href="http://blog.chromium.org/2013/09/saying-goodbye-to-our-old-friend-npapi.html" target="_blank">read more about it here</a>).
+            </p>
+            <p>
+                If you get a message: “Unity needs your permission to run” just right click and select “Run this Plug-in”.
+            </p>
+            <p>
+                <strong>Play this game on your Android phone/tablet</strong>: Install from <a href="https://play.google.com/store/apps/details?id=com.bipbop.Reflect" target="_blank">Google Play</a>.
+            </p>
+
+
+            <br>
+            <a href="https://play.google.com/store/apps/details?id=com.bipbop.Reflect" target="_blank">
+                <img src="img/get-it-on-google-play.png" />
+            </a>
+
+            <br>
+            <br>
+
+
+            <div class="fb-like" data-href="https://www.facebook.com/reflectyoself" data-width="300px" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="dark"></div>
+            <br>
+            <br>
+
+            <a href="https://twitter.com/intent/tweet?text=Play free Reflect Yoself game online&url=http://bipbopgames.com/reflect-yoself&hashtags=gamedev,indiedev,freegame&via=bipbopgames" target="_blank" title="Share on Twitter" class="social-link"><img src="img/social-twitter.png" />
+            </a>
+
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://bipbopgames.com/reflect-yoself.html" target="_blank" title="Share on Facebook" class="social-link"><img src="img/social-facebook.png" />
+            </a>
+
+            <a href="https://plus.google.com/share?url=http://bipbopgames.com/reflect-yoself.html" target="_blank" title="Share on Google Plus" class="social-link"><img src="img/social-googleplus.png" />
+            </a>
+
+
+
+            <br>
+            <br>
+
+            <!--
+            <h1>Game Description</h1>
+            <p>
+
+                Draw the lines with your finger to make cute monster bounce in desired direction. This simple game is a hard and fun challenge for your orientation ability - You'll need to predict and aim where you wanna reflect by drawing a line in front of your moving player to change his course. It's really easy to play but hard to master. ;)
+            </p>
+            <p>
+                Avoid a cloudy cloud and eat as many lemons as you can. If you grab 'em fast and bounce, you'll be awarded with bonus points for that action. Now you can show your precision by quickly lightning three torches in a row and get few points extra.
+            </p>
+            <p>
+                Remember: <strong>It's all about drawing the right lines.</strong> Have fun and Happy reflecting!
+            </p>
+
+
+            <p>
+                Copyright © 2015 <a href="http://bipbopgames.com" target="_blank">bipbop games</a>. All rights reserved.
+            </p>
+
+            -->
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-57917812-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+</body>
+
+</html>
